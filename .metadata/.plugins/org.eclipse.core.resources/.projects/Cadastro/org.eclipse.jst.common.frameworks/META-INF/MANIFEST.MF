@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Class-Path: antlr-2.7.6.jar c3p0-0.9.1.2.jar cglib-nodep-2.1_3.jar com
+ mons-collections-2.1.1.jar commons-logging-1.0.4.jar dom4j-1.6.1.jar 
+ ejb3-persistence.jar hibernate3.jar hibernate-annotations.jar hiberna
+ te-commons-annotations.jar hibernate-entitymanager.jar hibernate-vali
+ dator.jar javassist.jar jboss-archive-browsing.jar jta.jar log4j-1.2.
+ 11.jar mysql-connector-java-5.1.5-bin.jar
+

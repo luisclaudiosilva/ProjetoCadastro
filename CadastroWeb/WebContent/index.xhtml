@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<head>
+          
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        
+        <link rel="shortcut icon" href="favicon.ico" />
+
+        <!--Chamada ao arquivo tabelas.css que contém as espeficicação de estilos -->
+
+        <link rel="stylesheet" type="text/css"  href="resources/css/tabelasInicio.css"/>  
+
+        <title>Cadastro</title>
+
+    </head>
+
+
+<body>
+
+
+<div class="header">
+
+	&#160;&#160;Cadastro
+</div>
+  
+
+<f:view>
+
+<fieldset id="fildIndex">
+<h:form id="formIndex">
+	
+	<br/>
+	<h:column>
+		<h:commandLink target="iframe" action="#{controleCliente.chama}" class="linkPac">
+			 Cadastro de Pacotes
+			<f:setPropertyActionListener value="#{cliente}" target="#{controleCliente.cliente}"></f:setPropertyActionListener>
+		</h:commandLink>
+		&#160;&#160;&#160;&#160;&#160;&#160;
+		<h:commandLink target="iframe" action="#{controleRegra.chama()}" class="linkPac">
+			 Cadastro de Regras
+			<f:setPropertyActionListener value="#{regra}" target="#{controleRegra.regra}"></f:setPropertyActionListener>
+		</h:commandLink>
+	</h:column>
+	<br/>
+	<br/>
+	
+	<br/>
+	<br/>
+
+</h:form>
+
+</fieldset>
+</f:view>
+
+<ui:insert name="header">
+  <!-- Import de página do cabeçalho -->
+  <iframe frameborder="0" scrolling="yes" name="iframe" src="imagem.xhtml" width="100%" height="400px" /> 
+</ui:insert>
+
+<div class="footer">
+Todos os direitos reservados. Projeto de Cadastro 2015 &copy;
+</div>
+
+
+          
+</body>	
+
+</html>

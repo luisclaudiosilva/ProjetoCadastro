@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <!--Chamada ao arquivo tabelas.css que contém as espeficicação de estilos -->
+
+        <link rel="stylesheet" type="text/css"  href="resources/css/tabelas.css"/>  
+
+        <title>Cadastro de Pacote</title>
+		 
+    </head>
+
+
+<body>
+
+<f:view>
+
+<h:form >
+
+<fieldset id="fildCliente">
+
+	<legend align="center">Pacotes Cadastrados</legend>
+	<hr/>
+	<h:commandButton action="#{controleCliente.chamaFoto}" value="Início" styleClass="botoes"/>
+	&#160;&#160;&#160;&#160;&#160;&#160;
+	<h:commandButton action="#{controleCliente.novo}" value="Cadastrar" styleClass="botoes"/>
+	<hr/>
+
+<h:dataTable value="#{controleCliente.clientes}" var="cliente" border="1" align="center" 
+styleClass="tabela table-action"   headerClass="cabecalho"  columnClasses="primeiro,ultimo,ultimo,ultimo,ultimo,ultimo,ultimo,ultimo">
+
+	<h:column>
+	<f:facet name="header">Id</f:facet>
+		#{cliente.id} 
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Origem</f:facet>
+		#{cliente.origem} 
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Destino</f:facet>
+		#{cliente.destino}
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Protocolo</f:facet>
+		#{cliente.protocolo}
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Porta</f:facet>
+		#{cliente.porta}
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Dados</f:facet>
+		#{cliente.dados}
+	</h:column>
+	
+	<h:column>
+		<h:commandLink action="#{controleCliente.editar}" class="linkCli">
+			Editar
+			<f:setPropertyActionListener value="#{cliente}" target="#{controleCliente.cliente}"></f:setPropertyActionListener>
+		</h:commandLink>
+	</h:column>
+	
+	
+	<h:column>
+		<f:facet name="header"><a id="baixar" class="linkCli" href = "WordServlet">Baixar</a></f:facet>
+		<h:commandLink action="#{controleCliente.remover}" class="linkCli">
+			Remover
+			<f:setPropertyActionListener value="#{cliente}" target="#{controleCliente.cliente}"></f:setPropertyActionListener>
+		</h:commandLink>
+	</h:column>
+	
+
+</h:dataTable>
+
+</fieldset>
+
+</h:form>
+
+</f:view>
+
+</body>	
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<head>
+
+<title>Formulário de Pacotes</title>
+
+<h:outputScript name="script.js" library="js"></h:outputScript>
+
+<!--Chamada ao arquivo CSS -->
+<link rel="StyleSheet" type="text/css" href="resources/css/estilos.css" media="screen" />
+
+</head>
+
+<body>
+
+<f:view class="view">
+
+<h:form id="form" name="form">
+
+<fieldset>
+
+	<legend align="center">Formulário de Pacote</legend>
+	<hr/>
+	
+	
+	<h:outputText value="Origem: &#160; &#160;&#160;" styleClass="rotulos"/>
+	<h:inputText value="#{controleCliente.cliente.origem}" type="text" 
+	label="Origem" size="15" maxlength="15" styleClass="edit" id="origem" required="true"
+	onkeypress ="maskIP(event,this);" requiredMessage="Valor necessário!"
+	onblur="validateIP(this);" 
+	onfocus="this.style.backgroundColor='transparent';"/>&#160;&#160;
+	<h:message for="origem" styleClass="RED" />
+	
+	<br/>
+	<br/>
+	
+	<h:outputText value="Destino: &#160; &#160;&#160;" styleClass="rotulos"/>
+	<h:inputText label="Destino" value="#{controleCliente.cliente.destino}" 
+	styleClass="edit" size="15" maxlength="15" id="destino" required="true"
+	onkeypress ="maskIP(event,this);" requiredMessage="Valor necessário!"
+	onblur="validateIP(this);" 
+	onfocus="this.style.backgroundColor='transparent';"/>&#160;&#160;
+	<h:message for="destino" styleClass="RED" />
+
+	<br/>
+	<br/>
+	
+	<h:outputText value="Protocolo: &#160;" styleClass="rotulos"/>
+    <h:selectOneMenu label="Protocolo" id="protocolo" value="#{controleCliente.cliente.protocolo}" 
+    styleClass="edit" required="true" requiredMessage="Valor necessário!">                                             
+  	<f:selectItem itemLabel="" itemValue=""/>  
+	<f:selectItem itemLabel="TCP" itemValue="TCP"/>  
+	<f:selectItem itemLabel="UDP" itemValue="UDP"/>    
+	<f:selectItem itemLabel="ICMP" itemValue="ICMP"/>
+	</h:selectOneMenu>
+    &#160;&#160;
+	<h:message for="protocolo" styleClass="RED" />
+	
+	<br/>
+	<br/>
+	
+	<h:outputText value="Porta: &#160; &#160; &#160; &#160;&#160;" styleClass="rotulos"/>
+	<h:inputText label="Porta" value="#{controleCliente.cliente.porta}" requiredMessage="Valor necessário!"
+	onkeydown="return SomenteNumero2(event)"
+	onblur="validaZero(this);"
+	maxlength="5" styleClass="edit" id="porta" name="porta" required="true">
+	<f:validateLongRange maximum="65536" minimum="0"/>
+	</h:inputText>&#160;&#160;
+	<h:message for="porta" styleClass="RED" />
+	
+	<br/>
+	<br/>
+	
+	<h:outputText value="Dados: &#160; &#160; &#160;&#160;" styleClass="rotulos"/>
+	<h:inputText label="Dados" value="#{controleCliente.cliente.dados}" required="true" requiredMessage="Valor necessário!"
+	onblur="return valida(this);"  
+	maxlength="50" styleClass="edit" id="dados" />&#160;&#160;
+	<h:message for="dados" styleClass="RED" />
+	<br/>
+	
+	<br/>
+	
+	<hr/>
+	        
+	<h:commandButton action="#{controleCliente.salvar}" 
+	value="Enviar" styleClass="botao1" />
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<h:commandButton action="#{controleCliente.limparCampos}" immediate="true" value="Limpar" styleClass="botao2"/>
+
+</fieldset>
+              
+</h:form>
+
+<h:form>
+<h:commandButton type="submit" action="#{controleCliente.chamaFoto}" value="Início" styleClass="botaoCli"/>
+<h:commandButton action="#{controleCliente.chama}" value="Voltar" styleClass="botaoCli2"/>
+</h:form>
+
+</f:view>
+
+</body>
+</html>

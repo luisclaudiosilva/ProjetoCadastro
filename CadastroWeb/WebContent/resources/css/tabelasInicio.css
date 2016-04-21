@@ -1,0 +1,109 @@
+*{
+
+    /*Define  que todos os elementos da página, ficarão em negrito e com a fonte arial */
+
+    font-weight: bold;
+
+    font-family: arial;
+
+    /*Define a tamanho da fonte para todos os elementos */
+
+    font-size: 22px;
+    
+    background-color: #f7f7f7;
+
+}
+
+iframe{
+  margin-top: 10px;
+  margin-bottom: 15px;
+
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 10px;
+
+  -moz-box-shadow: 4px 4px 14px #000;
+  -webkit-box-shadow: 4px 4px 14px #000;
+  box-shadow: 4px 4px 14px #000;
+}
+
+.header {
+background-color: #302f31;
+color: #FFFFFF;
+font-size: 38px;
+font-style: italic;
+height: 52px;
+padding: 10px;
+margin-left: -8px;
+margin-right: -8px;
+margin-top: -8px;
+}
+            
+.footer {
+height: 42px;
+font-style: italic;
+text-align: center;
+font-size: 12px;
+background-color: #302f31;
+color: white;
+padding-top: 30px;
+margin-left: -8px;
+margin-right: -8px;
+margin-bottom: -8px;
+margin-top: auto;
+position: absolute;
+width: 100%;
+}
+
+#fildIndex{
+	text-align: left;
+	margin-top: 1px;
+    position: relative;
+    margin-left: 5px;
+    height: 80px;
+    position: relative;
+    border: none;
+}
+
+#formIndex{
+	text-align: center;
+	height: 70px;
+	width: 600px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-left:-300px;
+	margin-top:-35px;
+}
+
+.linkPac{
+	
+	font-size: 25px;
+	
+}
+
+.linkPac:link, .linkPac:visited {
+	background-color: #f7f7f7;
+	text-decoration: none;
+	color: #000000;
+	}
+.linkPac:hover {
+	text-decoration: none; 
+	color: #9e9e9e
+	}
+.linkPac:active {
+	text-decoration: none
+}
+
+#imagem{
+	height: 350px;
+	width: 350px;
+	position:relative;
+	left:50%;
+	margin-left:-350px;
+	margin-top:10px;
+}
+
+
+
+

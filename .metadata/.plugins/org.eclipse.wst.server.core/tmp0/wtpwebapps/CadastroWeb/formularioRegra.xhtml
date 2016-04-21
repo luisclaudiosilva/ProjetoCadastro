@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<head>
+
+<title>Formulário de Regras</title>
+
+<h:outputScript name="script.js" library="js"></h:outputScript>
+
+<!--Chamada ao arquivo CSS -->
+<link rel="StyleSheet" type="text/css" href="resources/css/estilos2.css" media="screen" />
+
+</head>
+
+<body>
+
+<f:view>
+
+<h:form id="form" name="form">
+
+<fieldset>
+
+	<legend align="center">Formulário de Regras</legend>
+	<hr/>
+	<h:outputText value="Prioridade: &#160;&#160;" styleClass="rotulos"/>
+	<h:inputText value="#{controleRegra.regra.prioridade}" 
+	type="text" 
+	label="Prioridade" size="2" maxlength="2" 
+	onkeypress="return SomenteNumero2(event)" requiredMessage="Valor necessário!"
+	onblur="validaZero2(this);"
+	styleClass="edit" id="prioridade" name="prioridade" required="true">
+	</h:inputText>&#160;&#160;
+	<h:message for="prioridade" styleClass="RED" />
+	
+	<br/>
+	
+	<h:outputText value="Nome: &#160; &#160; &#160; &#160; &#160;" styleClass="rotulos"/>
+	<h:inputText label="Nome" value="#{controleRegra.regra.nome}" 
+	size="20" maxlength="20" name="nome" requiredMessage="Valor necessário!"
+	styleClass="edit" id="nome" required="true"
+	/>&#160;&#160;
+	<h:message for="nome" styleClass="RED" /> 
+
+	<br/>
+	
+	<h:outputText value="Ip Origem: &#160;&#160;&#160;" styleClass="rotulos"/>
+	<h:inputText value="#{controleRegra.regra.origem}" type="text" 
+	label="Origem" size="15" maxlength="15" styleClass="edit" id="origem" required="true"
+	onkeydown="return SomenteNumero(event)" requiredMessage="Valor necessário!"
+	onkeypress ="maskIP(event,this);" 
+	onblur="validateIP(this);"
+	onfocus="this.style.backgroundColor='transparent';"/>
+	<h:message for="origem" styleClass="RED" />
+	<br/>
+	
+	<h:outputText value="Ip Destino: &#160;&#160;&#160;" styleClass="rotulos"/>
+	<h:inputText label="Destino" value="#{controleRegra.regra.destino}" size="15" maxlength="15" 
+	onkeypress ="maskIP(event,this);" styleClass="edit" id="destino" required="true"
+	onblur="validateIP(this);" requiredMessage="Valor necessário!"
+	onfocus="this.style.backgroundColor='transparent';"/>
+	<h:message for="destino" styleClass="RED" />
+
+	<br/>
+	
+	<h:outputText value="Direção: &#160;&#160;&#160;&#160; &#160;&#160;" styleClass="rotulos"/>
+    <h:selectOneMenu label="Direcao" id="direcao" value="#{controleRegra.regra.direcao}" 
+    styleClass="edit" required="true" requiredMessage="Valor necessário!">                                             
+  	<f:selectItem itemLabel="" itemValue=""/>  
+	<f:selectItem itemLabel="ENTRADA" itemValue="ENTRADA"/>  
+	<f:selectItem itemLabel="SAÍDA" itemValue="SAÍDA"/>    
+	</h:selectOneMenu> &#160;&#160; 
+	<h:message for="direcao" styleClass="RED" />
+	
+	<br/>
+	
+	<h:outputText value="Protocolo: &#160;&#160;&#160;&#160;" styleClass="rotulos"/>
+    <h:selectOneMenu label="Protocolo" id="protocolo" requiredMessage="Valor necessário!"
+    value="#{controleRegra.regra.protocolo}" styleClass="edit" required="true">                                             
+  	<f:selectItem itemLabel="" itemValue="******"/>  
+	<f:selectItem itemLabel="TCP" itemValue="TCP"/>  
+	<f:selectItem itemLabel="UDP" itemValue="UDP"/>    
+	<f:selectItem itemLabel="ICMP" itemValue="ICMP"/>
+	</h:selectOneMenu> 
+    &#160;&#160;
+    <h:message for="protocolo" styleClass="RED" />
+	
+	<br/>
+	
+	<h:outputText value="Porta Inicial: &#160;" styleClass="rotulos"/>
+	<h:inputText label="PortaInicial" value="#{controleRegra.regra.portaInicial}" 
+	maxlength="5" styleClass="edit" id="portaInicial" required="true" requiredMessage="Valor necessário!" name = "portaInicial"
+	onkeypress="return SomenteNumero(event)" 
+	onblur="validaPorta(this);"> 
+	</h:inputText>&#160;&#160;
+	<h:message for="portaInicial" styleClass="RED" />
+	
+	<br/>
+	
+	<h:outputText value="Porta Final: &#160; &#160;" styleClass="rotulos"/>
+	<h:inputText label="PortaFinal" value="#{controleRegra.regra.portaFinal}" 
+	maxlength="5" styleClass="edit" id="portaFinal" name="portaFinal"
+	onkeydown="ativaPorta(this);"
+	onkeypress="return SomenteNumero(event)"
+	onblur="validaPorta(this);">
+	</h:inputText>&#160;&#160;
+
+	
+	<br/>
+	
+	<h:outputText value="Ação:  &#160;&#160; &#160; &#160; &#160; &#160; &#160;" styleClass="rotulos"/>
+	<h:selectOneMenu label="Acao" id="acao" requiredMessage="Valor necessário!"
+	value="#{controleRegra.regra.acao}" styleClass="edit" required="true">                                             
+  	<f:selectItem itemLabel="" itemValue=""/>  
+	<f:selectItem itemLabel="PERMITIR" itemValue="PERMITIR"/>  
+	<f:selectItem itemLabel="BLOQUEAR" itemValue="BLOQUEAR"/>    
+	</h:selectOneMenu> 
+	&#160;&#160;
+	<h:message for="acao" styleClass="RED" />
+
+	<br/>
+	
+	<h:outputText value="Conteudo: &#160;&#160; &#160;&#160;" styleClass="rotulos"/>
+	<h:inputText label="Conteudo" value="#{controleRegra.regra.conteudo}" requiredMessage="Valor necessário!"
+	maxlength="50" styleClass="edit" id="conteudo" required="true"/>&#160;&#160;
+	<h:message for="conteudo" styleClass="RED" />
+	
+	<hr/>
+	        
+	<h:commandButton action="#{controleRegra.salvar}" value="Enviar" styleClass="botao1"/>
+	
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	
+	<h:commandButton action="#{controleRegra.limparCampos}" immediate="true" value="Limpar" styleClass="botao2"/>
+
+</fieldset>
+              
+</h:form>
+
+<h:form>
+<h:commandButton action="#{controleRegra.chamaFoto}" value="Início" styleClass="botaoCli"/>
+<h:commandButton action="#{controleCliente.chamaRegra}" value="Voltar" styleClass="botaoCli2"/>
+</h:form>
+
+</f:view>
+
+</body>
+</html>

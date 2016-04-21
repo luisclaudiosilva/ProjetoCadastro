@@ -1,0 +1,160 @@
+*{
+	
+
+    /*Define  que todos os elementos da página, ficarão em negrito e com a fonte arial */
+
+    font-weight: bold;
+
+    font-family: arial;
+
+    /*Define a tamanho da fonte para todos os elementos */
+    
+    background-color: #eeeeee;
+
+}
+
+#form{
+	/* Largura máxima */
+	max-width:960px;
+	/* Alinha ao centro */
+	margin:0 auto;
+	overflow:hidden;
+}
+
+
+.edit {
+
+    /*Define a borda do elemento, com um efeito de baixo-relevo menor que o padrão */
+
+    border: 1px inset;
+
+    /*Especifica a cor cinza, como pano de fundo do elemento */
+
+    background-color: #D3D3D3;
+
+    /*Especifica como preta a  cor da fonte do elemento */
+
+    color: #000000;
+    
+    font-size: 20px;
+    
+   
+      
+}
+
+.botao1 {
+
+    /*Especifica a cor chocolate, como pano de fundo do elemento */
+
+    background-color: #616161;
+
+    /*Especifica como preta a cor da fonte do elemento */
+
+    color: #FFFFFF;
+
+    /*Define a borda do elemento, com um efeito de alto-relevo menor que o padrão */
+
+    border: 1px outset;
+    
+    margin-left: 35%;
+    
+    font-size: 15px;
+
+}
+
+.botao2{
+	/*Especifica a cor chocolate, como pano de fundo do elemento */
+
+    background-color: #616161;
+
+    /*Especifica como preta a cor da fonte do elemento */
+
+    color: #FFFFFF;
+
+    /*Define a borda do elemento, com um efeito de alto-relevo menor que o padrão */
+
+    border: 1px outset;
+    
+    font-size: 15px;
+   
+    margin-left: 5%;
+}
+
+.rotulos {
+
+    /*Especifica preta a cor da fonte do elemento */
+
+    color: #000000;
+    margin-left: 33%;
+    font-size: 20px;
+    
+}
+
+legend{
+
+    /*Define o tamanho da fonte para a legenda do FieldSet */
+    
+    font-style: italic;
+    font-size: 20px;
+    text-align: center;
+
+}
+
+fieldset{
+	
+	margin-top: 1%;
+	margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    background-color: #f7f7f7;
+	position: relative;
+}
+
+.RED {
+
+      font-weight: bold;
+
+      color: red;
+
+      font-size: 12px;
+
+}
+
+.botaoCli{
+	font-size: 20px;
+	
+	text-align: center;
+	/*Especifica a cor chocolate, como pano de fundo do elemento */
+
+    background-color: #616161;
+
+    /*Especifica como preta a cor da fonte do elemento */
+
+    color: #FFFFFF;
+
+    /*Define a borda do elemento, com um efeito de alto-relevo menor que o padrão */
+
+    border: 1px outset;
+    
+    margin-left: 210px;
+}
+
+.botaoCli2{
+	font-size: 20px;
+	
+	text-align: center;
+	/*Especifica a cor chocolate, como pano de fundo do elemento */
+
+    background-color: #616161;
+
+    /*Especifica como preta a cor da fonte do elemento */
+
+    color: #FFFFFF;
+
+    /*Define a borda do elemento, com um efeito de alto-relevo menor que o padrão */
+
+    border: 1px outset;
+    
+    margin-left: 2%;
+}
+

@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <!--Chamada ao arquivo tabelas.css que contém as espeficicação de estilos -->
+
+        <link rel="stylesheet" type="text/css"  href="resources/css/tabelas2.css"/>  
+
+        <title>Cadastro de Regra</title>
+
+    </head>
+
+
+<body>
+<f:view>
+
+<h:form>
+
+<fieldset class="fildReg">
+
+	<legend align="center">Cadastro de Regras</legend>
+	<hr/>
+	<h:commandButton action="#{controleCliente.chamaFoto}" value="Início" styleClass="botoes"/>
+	&#160;&#160;&#160;&#160;&#160;&#160;
+	<h:commandButton action="#{controleRegra.novo}" value="Cadastrar" styleClass="botoes"/>
+	<hr/>
+	
+<h:dataTable value="#{controleRegra.regras}" var="regra" border="1" align="center"
+styleClass="tabela table-action"   headerClass="cabecalho"  columnClasses="ultimo,ultimo,ultimo,ultimo,ultimo,ultimo,ultimo,ultimo,ultimo,ultimo,ultimo,ultimo">
+	
+	
+	<h:column>
+	<f:facet name="header">Prioridade</f:facet>
+		#{regra.prioridade} 
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Nome</f:facet>
+		#{regra.nome}
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Origem</f:facet>
+		#{regra.origem}
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Destino</f:facet>
+		#{regra.destino}
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Direção</f:facet>
+		#{regra.direcao}
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Protocolo</f:facet>
+		#{regra.protocolo} 
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Porta Inicial</f:facet>
+		#{regra.portaInicial}
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Porta Final</f:facet>
+		#{regra.portaFinal}
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Ação</f:facet>
+		#{regra.acao}
+	</h:column>
+	
+	<h:column>
+	<f:facet name="header">Conteudo</f:facet>
+		#{regra.conteudo}
+	</h:column>
+	
+	<h:column>
+		<h:commandLink action="#{controleRegra.editar}" class="linkReg">
+			Editar
+			<f:setPropertyActionListener value="#{regra}" target="#{controleRegra.regra}"></f:setPropertyActionListener>
+		</h:commandLink>
+	</h:column>
+	
+	<h:column>
+		<h:commandLink action="#{controleRegra.remover}" class="linkReg">
+			Remover
+			<f:setPropertyActionListener value="#{regra}" target="#{controleRegra.regra}"></f:setPropertyActionListener>
+		</h:commandLink>
+	</h:column>
+	
+
+</h:dataTable>
+
+<hr/>
+
+<br/>
+
+</fieldset>
+
+</h:form>
+
+</f:view>
+
+<h:form id="form2" enctype="multipart/form-data">
+
+        <h:outputLabel value="Arquivo &#160;&#160;" for="arquivo"  />
+        <h:inputFile id="arquivo" value="#{importadorBean.arquivo}" validator="#{importadorBean.valida}"
+            required="true" label="Arquivo" />
+<br/>
+<br/>
+        <h:commandButton value="Importar" action="#{importadorBean.importa}" styleClass="botoes"/>
+    </h:form>
+
+
+
+</body>	
+
+</html>

@@ -1,0 +1,270 @@
+package com.exemplo.controle;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.io.StringReader;
+import java.util.Scanner;
+import java.sql.*; 
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
+import javax.servlet.http.Part;
+import javax.swing.JOptionPane;
+
+@ManagedBean
+public class ImportadorBean {
+	
+
+	
+	private static final int MAX_SIZE = 2 * 1024 * 1024;
+
+	private Part arquivo; 
+	 
+
+    public void importa()
+    {
+
+       try //try 1
+       { 
+ 
+			String conteudo = new Scanner(arquivo.getInputStream()).useDelimiter("\\A").next();
+
+			StringReader arq = new StringReader(conteudo);
+
+			BufferedReader lerArq = new BufferedReader(arq);
+	    	String linha = lerArq.readLine(); // lê a primeira linha
+	    	
+
+			LineNumberReader lnr = new LineNumberReader(new StringReader(conteudo));
+			
+			lnr.skip(Long.MAX_VALUE);
+			int retorno = lnr.getLineNumber();
+
+	    	int sub = retorno - 1;
+
+	    	try{
+			 if ( Integer.parseInt(linha) == sub ) //if 1
+			 {  
+				JOptionPane.showMessageDialog(null, "Valor da primeira linha: "+linha);
+				 
+				 if(Integer.parseInt(linha) == sub) //if 2
+				 {
+					 JOptionPane.showMessageDialog(null, "Valor da primeira linha: "+linha+ "\nIgual\nQuantidade de registros na tabela : "+sub);
+					 
+					 if((conteudo.toLowerCase().contains("EOF".toLowerCase()))) //if 3
+					 {
+						 Connection conn = null;   
+					    	java.sql.Statement st;
+					    	
+					    	Connection conn2 = null;   
+					    	java.sql.Statement st2;
+
+					    	try //try 2  
+					    	{  
+					    		String userName = "Luis";
+					    	    String password = "6871";
+					    		String url = "jdbc:mysql://localhost";
+					    		
+					    	    // Este é um dos meios para registrar um driver   
+					    	    Class.forName("com.mysql.jdbc.Driver");  
+					    	   
+					    	    // Registrado o driver, vamos estabelecer uma conexão  
+					    	    conn = DriverManager.getConnection(url, userName, password); 
+					    	    conn2 = DriverManager.getConnection(url, userName, password); 
+					    	    System.out.println ("Conexão com o BD estabelecida!");
+
+					    	    // Após estabelecermos a conexão com o banco de dados  
+					    	    // Utilizamos o método createStatement de con para criar o Statement  
+					    	    st = conn.createStatement(); 
+					    	    st2 = conn2.createStatement();
+
+					    	    // Definido o Statement, executamos a query no banco de dados  
+					    	    ResultSet rs = st.executeQuery("SELECT * FROM loja.regra ORDER BY prioridade ASC"); 
+					    	    ResultSet rs2 = st2.executeQuery("SELECT * FROM loja.cliente"); 
+					    	    
+					    	    while(rs2.next() && rs.next()){  
+
+					    	       // Os métodos getXXX recuperam os dados de acordo com o tipo SQL do dado:  
+					    	       int pri = rs.getInt("prioridade"); 
+					    	       String nome = rs.getString("nome");  
+					    	       String direcao = rs.getString("direcao");  
+					    	       String origem =  rs.getString("origem");
+					    	       String destino = rs.getString("destino");
+					    	       String protocolo = rs.getString("protocolo");
+					    	       String portaInicial = rs.getString("portaInicial");
+					    	       String portaFinal = rs.getString("portaFinal");
+					    	       String acao = rs.getString("acao");
+					    	       
+					    	       String ori = rs2.getString("origem");
+					    	       String dest = rs2.getString("destino");
+					    	       String prot = rs2.getString("protocolo");
+					    	       String port = rs2.getString("porta");
+					    	       
+					    	       if(direcao.equals( "ENTRADA")) //if entrada
+					    	       {
+					    	    		boolean origemIgual = origem.equals( ori );
+					    	    		boolean origemDiferente = !origem.equals( ori );
+					    	    		
+					    	    		boolean destinoIgual = destino.equals( dest );
+					    	    		boolean destinoDiferente = !destino.equals( dest );
+					    	    		
+					    	    		boolean protocoloIgual = protocolo.equals( prot );
+					    	    		//boolean protocoloDiferente = !protocolo.equals( prot );
+					    	    		
+					    	    		boolean portaInicialIgual = portaInicial.equals( port );
+					    	    		//boolean portaInicialDiferente = !portaInicial.equals( port );
+					    	    		
+					    	    		boolean portaFinalIgual = portaFinal.equals( port );
+					    	    		//boolean portaFinalDifrente = !portaFinal.equals( port );
+					    	    		
+					    	    		if ((origemIgual || origemDiferente) && (origemIgual || origemDiferente))
+					    	        	   {
+					    	        		   if ( protocoloIgual && portaInicialIgual && portaFinalIgual)
+												{
+													JOptionPane.showMessageDialog(null,"Prioridade: "+pri+"\nPacote\nOrigem: " + ori + "\nDestino: " + dest+ "\nProtocolo: " + prot + "\nPorta: " + port + "\n--------------\nRegra\nNome: "+nome+"\nOrigem: " + origem + "\nDestino: " + destino + "\nProtocolo atingido: " + prot + "\nPorta atingida: " + port + "\nAção: " +acao);
+												}
+					    	    			
+					    	    			
+					    	        	   }else{
+					    	        		  //JOptionPane.showMessageDialog(null, "Protocolo diferente!");
+					    	        	   }
+					    	    		
+					    	    		/*if (origem.equals( ori ))
+					    	      	   {
+					    	      		   JOptionPane.showMessageDialog(null,"Prioridade: "+pri+"\nPacote\nOrigem: " + ori + "\nDestino: " + dest+ "\nProtocolo: " + prot + "\nPorta: " + port + "\n--------------\nRegra\nNome: "+nome+"\nOrigem: " + origem + "\nAção: " +acao);
+					    	      		 
+					    	      	   }else{
+					    	      		   //JOptionPane.showMessageDialog(null, "Origem diferente!");
+					    	      	   }
+					    	    		
+					    	    		if (destino.equals( dest ))
+					    	       	   {
+					    	    			JOptionPane.showMessageDialog(null,"Prioridade: "+pri+"\nPacote\nOrigem: " + ori + "\nDestino: " + dest+ "\nProtocolo: " + prot + "\nPorta: " + port + "\n--------------\nRegra\nNome: "+nome+"\nDestino: " + destino + "\nAção: " +acao);
+					    	    			
+					    	       	   }else{
+					    	       		   //JOptionPane.showMessageDialog(null, "Ip Destino diferente!");
+					    	       	   }*/
+					    	    		
+					    	    		
+					    	    		
+					    	    		/*if (portaInicial.equals( port ))
+					    	     	   {
+					    	    			JOptionPane.showMessageDialog(null,"Prioridade: "+pri+"\nPacote\nOrigem: " + ori + "\nDestino: " + dest+ "\nProtocolo: " + prot + "\nPorta: " + port + "-Porta Inicial\n--------------\nRegra\nNome: "+nome+"\nPorta Inicial: " + portaInicial + "\nAção: " +acao);
+					    	    			
+					    	     	   }else{
+					    	     		  // JOptionPane.showMessageDialog(null, "Porta diferente!");
+					    	     	   }*/
+					    	    		
+					    	    		/*if (portaFinal.equals( port ))
+					    	      	   {
+					    	    			JOptionPane.showMessageDialog(null,"Prioridade: "+pri+"\nPacote\nOrigem: " + ori + "\nDestino: " + dest+ "\nProtocolo: " + prot + "\nPorta: " + port + "-Porta Final\n--------------\nRegra\nNome: "+nome+"\nPorta Final: " + portaFinal + "\nAção: " +acao);
+					    	    			
+					    	      	   }else{
+					    	      		  // JOptionPane.showMessageDialog(null, "Porta diferente!");
+					    	      	   }*/	
+					    	    		
+					    	    		/*if (!origem.equals( ori ))
+						    	      	   {
+					    	    			if (!destino.equals( dest ) )
+							    	       	   {
+					    	    				if (!protocolo.equals( prot )) 
+							    	        	   {
+					    	    					if (!portaInicial.equals( port ))
+									    	     	   {
+					    	    						if (!portaFinal.equals( port ) )
+										    	      	   {
+					    	    							JOptionPane.showMessageDialog(null,"Regra de Prioridade: "+pri+" não atingiu nenhum pacote!");
+										    	    			
+										    	      	   }
+									    	    			
+									    	     	   }
+							    	    			
+							    	        	   }
+							    	    			
+							    	       	   }
+						    	    			
+						    	      	   }*/
+					    	    		
+					    	    		
+					    	    	} // fim if entrada
+					    	       		else{
+					    	       				JOptionPane.showMessageDialog(null,"Regra de Prioridade : "+pri+"\nDireção da Regra: "+direcao);
+					    	       			}
+					    	       
+					    	    }
+					    	    
+					    	} // fim try 2
+					    	catch(SQLException e)  
+					    	{  
+					    	    // se houve algum erro, uma exceção é gerada para informar o erro   
+					    	    e.printStackTrace(); //vejamos que erro foi gerado e quem o gerou  
+					    	} catch (ClassNotFoundException e) {
+					    		// TODO Auto-generated catch block
+					    		e.printStackTrace();
+					    	}  
+					    	finally  
+					    	{  
+					    	   try   
+					    	   {  
+					    	      conn.close();  
+					    	   }  
+					    	   catch(SQLException onConClose)  
+					    	   {  
+					    	       System.out.println("Houve erro no fechamento da conexão");  
+					    	       onConClose.printStackTrace();  
+					    	   } 
+					    	}
+						 
+					 } //fecha if 3
+					 else{
+						 JOptionPane.showMessageDialog(null, "Erro!\nEOF não exite no arquivo!");
+					 }
+					 }//fecha if 2
+				 		else{
+						 JOptionPane.showMessageDialog(null, "Erro!\nValor da primeira linha diferente da quantidade de linhas do pacote!");
+					 }
+				 }//--------fecha if 1
+	    	}catch( NumberFormatException e ){  
+	            JOptionPane.showMessageDialog(null, "Arquivo invalido!", "ERRO!", JOptionPane.INFORMATION_MESSAGE); 
+	    	}
+	    	
+			
+        }//fecha try 1
+       catch(IOException e) 
+       {
+        	 System.err.println(e);
+        	//JOptionPane.showMessageDialog(null, "Erro!" + e);
+        }
+    }//fecha metodo importa
+	        
+ // getter e setter
+
+public Part getArquivo() 
+{
+return arquivo;
+}
+
+public void setArquivo(Part arquivo) {
+this.arquivo = arquivo;
+}
+	
+public void valida(FacesContext context, UIComponent component, Object value) 
+	{
+
+        Part arquivo = (Part) value;
+
+        if (arquivo.getSize() > MAX_SIZE) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                    "Arquivo muito grande", "O arquivo deve ter o tamanho máximo de 2mb.");
+            throw new ValidatorException(msg);
+        }
+
+        if (!"text/plain".equals(arquivo.getContentType())) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                    "Tipo de arquivo inválido", "O arquivo deve ser do tipo texto.");
+            throw new ValidatorException(msg);
+        }
+	}//fecha metodo valida
+}
